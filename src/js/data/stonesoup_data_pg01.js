@@ -14,8 +14,8 @@ const positionData = [
   {
     id:"background",
     children: [],
-    scaleX: .24,
-    scaleY: .24,
+    scaleX: .5,
+    scaleY: .5,
     x:0,
     y:0,
     rot: 0,
@@ -26,8 +26,8 @@ const positionData = [
   {
     id:"middleground",
     children: [],
-    scaleX: .24,
-    scaleY: .24,
+    scaleX: .5,
+    scaleY: .5,
     x:0,
     y:0,
     rot: 0,
@@ -91,7 +91,37 @@ const positionData = [
     anchorY: 1,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [
+      {
+        childImg: {
+          id: "raccoon_hat",
+          src: ""
+        },
+        steps: [
+          {
+            wait: 0,
+            x: 0,
+            y: 0,
+            t: 100,
+            sx: .28,
+            sy: .28,
+            easePow: 3,
+            rot: 0
+          },
+          {
+            wait: 150,
+            x: 0,
+            y: 0,
+            t: 100,
+            sx: .24,
+            sy: .24,
+            easePow: 3,
+            rot: 0
+          },
+        ]
+      }
+    ]
   },
   {
     id:"raccoon_gloves",
@@ -105,13 +135,43 @@ const positionData = [
     anchorY: 1,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [
+      {
+        childImg: {
+          id: "raccoon_hat",
+          src: ""
+        },
+        steps: [
+          {
+            wait: 0,
+            x: 0,
+            y: 0,
+            t: 100,
+            sx: .28,
+            sy: .28,
+            easePow: 1,
+            rot: 0
+          },
+          {
+            wait: 150,
+            x: 0,
+            y: 0,
+            t: 100,
+            sx: .24,
+            sy: .24,
+            easePow: 1,
+            rot: 0
+          },
+        ]
+      }
+    ]
   },
   {
     id:"frame",
     children: [],
-    scaleX: .24,
-    scaleY: .24,
+    scaleX: .5,
+    scaleY: .5,
     x:0,
     y:0,
     rot: 0,

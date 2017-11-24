@@ -1,34 +1,36 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import {positionData, loadingData} from "../../data/stonesoup_data.js";
+
 import "../../../sass/components/pages/canvas.sass"
 
+
 export default class Canvas extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.stage = {};
     this.width = "1024";
     this.height = "768";
-    this.positionData = positionData;
+    this.positionData = this.props.positionData;
     this.handleFileComplete = this.handleFileComplete.bind(this);
     this.renderCanvas = this.renderCanvas.bind(this);
     this.clickEvent = this.clickEvent.bind(this);
   }
 
-  componentDidMount() {
-    var canvas = ReactDOM.findDOMNode(this.refs.canvas);
-    this.stage = new createjs.Stage(canvas);
-    createjs.Ticker.addEventListener('tick', this.stage);
-    createjs.Ticker.setFPS(60);
-    // this.stage.enableMouseOver(10);
-
-    var queue = new createjs.LoadQueue(true);
-    queue.on("fileload", this.handleFileComplete.bind(this));
-    queue.on("complete", this.renderCanvas.bind(this));
-    for (var i = 0; i < loadingData.length; i++) {
-      queue.loadFile(loadingData[i]);
+  componentWillReceiveProps(nextProps) {
+    if (nextProps.stage) {
+      this.stage = nextProps.stage;
+      this.positionData = nextProps.positionData;
+      createjs.Ticker.addEventListener('tick', this.stage);
+      createjs.Ticker.setFPS(60);
+      // this.stage.enableMouseOver(10);
+      var queue = new createjs.LoadQueue(true);
+      queue.on("fileload", this.handleFileComplete.bind(this));
+      queue.on("complete", this.renderCanvas.bind(this));
+      for (var i = 0; i < nextProps.loadingData.length; i++) {
+        queue.loadFile(nextProps.loadingData[i]);
+      }
+      queue.load();
     }
-    queue.load();
   }
 
   handleFileComplete(e) {
@@ -41,8 +43,10 @@ export default class Canvas extends React.Component {
       return p.id === id;
     })
 
-    img.addEventListener("mousedown", this.clickEvent.bind(this, img, data));
-    this.setClickableDataParent(data, img);
+    if (id !== "frame") {
+      img.addEventListener("mousedown", this.clickEvent.bind(this, img, data));
+      this.setClickableDataParent(data, img);
+    }
 
     // Create image group if there are children objects
     if (data.children.length > 0) {
@@ -164,6 +168,7 @@ export default class Canvas extends React.Component {
   }
 
   clickEvent(img, data, e) {
+    console.log("click event", data.id);
     // TODO this is currently hardcoded to only use first clickable animation
     if (data.clickable && data.clickable.length > 0) {
       this.setSteps(data.clickable[0].childImg.src, data.clickable[0], 0);
@@ -173,7 +178,7 @@ export default class Canvas extends React.Component {
   render() {
     return (
       <div class="canvas-wrap">
-        <canvas ref="canvas" width={this.width} height={this.height}></canvas>
+
       </div>
     )
   }
