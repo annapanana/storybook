@@ -17,6 +17,7 @@ export default class Canvas extends React.Component {
         y:0,
         rot: 0,
         img: {},
+        a: 1,
         steps: []
       },
       {
@@ -29,6 +30,7 @@ export default class Canvas extends React.Component {
             scaleY: .5,
             x: 255,
             y: 200,
+            a: 0,
             steps: []
           }
         ],
@@ -39,6 +41,7 @@ export default class Canvas extends React.Component {
         x:this.width - 600,
         y:this.height,
         rot: 0,
+        a: 1,
         img: {},
         steps: [
           {
@@ -101,26 +104,59 @@ export default class Canvas extends React.Component {
             easePow: 1,
             rot: 0
           }
+        ],
+        clickable: [
+          {
+            childImg: {
+              id: "melinda_eye",
+              src: ""
+            },
+            steps: [
+              {
+                wait: 0,
+                x: 0,
+                y: 0,
+                t: 200,
+                sx: .5,
+                sy: .5,
+                easePow: 1,
+                rot: 0,
+                a: 1
+              },
+              {
+                wait: 500,
+                x: 0,
+                y: 0,
+                t: 200,
+                sx: .5,
+                sy: .5,
+                easePow: 1,
+                rot: 0,
+                a: 0
+              }
+            ]
+          }
         ]
       },
       {
         id:"melinda_hand",
         children: [],
-        scaleX: .35,
-        scaleY: .35,
+        scaleX: .25,
+        scaleY: .25,
         anchorX: 2,
         anchorY: 1.5,
         x:this.width - 275,
         y:this.height,
         img: {},
+        a: 1,
         steps: [
           {
             wait: 3000,
             x: 0,
             y: 0,
             t: 0,
-            sx: .35,
-            sy: .35,
+            sx: .25,
+            sy: .25,
             easePow: 0,
             rot: 0
           },
@@ -129,8 +165,8 @@ export default class Canvas extends React.Component {
             x: 0,
             y: 0,
             t: 500,
-            sx: .35,
-            sy: .35,
+            sx: .25,
+            sy: .25,
             easePow: 3,
             rot: -25
           },
@@ -139,8 +175,8 @@ export default class Canvas extends React.Component {
             x: 0,
             y: 0,
             t: 500,
-            sx: .35,
-            sy: .35,
+            sx: .25,
+            sy: .25,
             easePow: 3,
             rot: 25
           },
@@ -149,8 +185,8 @@ export default class Canvas extends React.Component {
             x: 50,
             y: 150,
             t: 1000,
-            sx: .35,
-            sy: .35,
+            sx: .25,
+            sy: .25,
             easePow: 3,
             rot: 0
           },
@@ -160,6 +196,7 @@ export default class Canvas extends React.Component {
 
     this.handleFileComplete = this.handleFileComplete.bind(this);
     this.renderCanvas = this.renderCanvas.bind(this);
+    this.clickEvent = this.clickEvent.bind(this);
   }
 
   componentDidMount() {
@@ -188,6 +225,9 @@ export default class Canvas extends React.Component {
     let data = this.positionData.find((p) => {
       return p.id === id;
     })
+
+    img.addEventListener("mousedown", this.clickEvent.bind(this, img, data));
+
     if (data.children.length > 0) {
       this.setImageGroup(img, data);
       return;
@@ -197,6 +237,7 @@ export default class Canvas extends React.Component {
     this.renderCanvas();
     // push loaded image to data set
     data.img = img;
+    img.alpha = data.a;
     this.setSteps(img, data, 0);
 
     // Add starting assets to the stage
@@ -210,7 +251,7 @@ export default class Canvas extends React.Component {
     var queue = new createjs.LoadQueue(true);
     queue.on("complete", this.positionGroup.bind(this, container, data));
     for (var i = 0; i < data.children.length; i++) {
-      queue.on("fileload", this.handleChildLoad.bind(this, container, data.children[i]));
+      queue.on("fileload", this.handleChildLoad.bind(this, container, data.children[i], data));
       queue.loadFile({
         id:data.children[i].id,
         src:data.children[i].img["src"]
@@ -218,19 +259,30 @@ export default class Canvas extends React.Component {
     }
   }
 
-  handleChildLoad(container, subData, e){
+  handleChildLoad(container, subData, data, e){
     let img = new createjs.Bitmap(e.item.src);
-    // TODO find a better way of setting children objects
+    img.addEventListener("mousedown", this.clickEvent.bind(this, img, subData));
     img.x = subData.x;
     img.y = subData.y;
     img.scaleX = subData.scaleX;
     img.scaleY = subData.scaleY;
+    img.alpha = subData.a;
+    this.setClickableData(data, img, subData.id);
     container.addChild(img);
+  }
+
+  setClickableData(data, img, id) {
+    for (var i = 0; i < data.clickable.length; i++) {
+      if (id === data.clickable[i].childImg.id) {
+        data.clickable[i].childImg.src = img;
+      }
+    }
   }
 
   positionGroup(container, data, e) {
     container.x = data.x;
     container.y = data.y;
+    container.alpha = data.a;
     this.setSteps(container, data, 0);
     this.stage.addChild(container);
   }
@@ -258,7 +310,8 @@ export default class Canvas extends React.Component {
         y: ySum,
         scaleX: data.steps[i].sx,
         scaleY: data.steps[i].sy,
-        rotation: data.steps[i].rot
+        rotation: data.steps[i].rot,
+        alpha: data.steps[i].a
       }, data.steps[i].t, createjs.Ease.getPowInOut(data.steps[i].easePow))
       .call(this.setSteps.bind(this, obj, data, i+1, xSum, ySum));
   }
@@ -280,6 +333,13 @@ export default class Canvas extends React.Component {
     if (bds === null) return;
     obj.regX = data.anchorX === 0 ? 0: bds.width/data.anchorX;
     obj.regY = data.anchorY === 0 ? 0: bds.height/data.anchorY;
+  }
+
+  clickEvent(img, data, e) {
+    console.log("CLICK");
+    console.log(data);
+    // TODO this is currently hardcoded to only use first clickable animation
+    this.setSteps(data.clickable[0].childImg.src, data.clickable[0], 0);
   }
 
   render() {
