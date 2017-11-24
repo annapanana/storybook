@@ -21,6 +21,111 @@ export default class Canvas extends React.Component {
         steps: []
       },
       {
+        id: "text_hi",
+        children: [],
+        scaleX: .75,
+        scaleY: .75,
+        x:this.width - 400,
+        y:this.height / 4,
+        rot: 0,
+        img: {},
+        a: 0,
+        steps: [
+          {
+            wait: 3000,
+            x: 0,
+            y: 0,
+            t: 500,
+            sx: .75,
+            sy: .75,
+            easePow: 1,
+            rot: 0,
+            a: 1
+          },
+          {
+            wait: 1000,
+            x: 0,
+            y: 0,
+            t: 500,
+            sx: .75,
+            sy: .75,
+            easePow: 1,
+            rot: 0,
+            a: 0
+          }
+        ]
+      },
+      {
+        id: "text_melinda_intro",
+        children: [],
+        scaleX: .5,
+        scaleY: .5,
+        x: 50,
+        y: 100,
+        rot: 0,
+        img: {},
+        a: 0,
+        steps: [
+          {
+            wait: 9000,
+            x: 0,
+            y: 0,
+            t: 500,
+            sx: .5,
+            sy: .5,
+            easePow: 1,
+            rot: 0,
+            a: 1
+          },
+          {
+            wait: 1000,
+            x: 0,
+            y: 0,
+            t: 500,
+            sx: .5,
+            sy: .5,
+            easePow: 1,
+            rot: 0,
+            a: 0
+          }
+        ]
+      },
+      {
+        id: "text_adventure_with_friends",
+        children: [],
+        scaleX: .5,
+        scaleY: .5,
+        x:this.width - 500,
+        y:100,
+        rot: 0,
+        img: {},
+        a: 0,
+        steps: [
+          {
+            wait: 12000,
+            x: 0,
+            y: 0,
+            t: 500,
+            sx: .5,
+            sy: .5,
+            easePow: 1,
+            rot: 0,
+            a: 1
+          },
+          {
+            wait: 2000,
+            x: 0,
+            y: 0,
+            t: 500,
+            sx: .5,
+            sy: .5,
+            easePow: 1,
+            rot: 0,
+            a: 0
+          }
+        ]
+      },
+      {
         id:"melinda_full",
         children: [
           {
@@ -76,7 +181,7 @@ export default class Canvas extends React.Component {
           },
           {
             wait: 0,
-            x: -100,
+            x: 0,
             y: 0,
             t: 0,
             sx: .75,
@@ -95,8 +200,8 @@ export default class Canvas extends React.Component {
             rot: 0
           },
           {
-            wait: 1000,
-            x: -150,
+            wait: 3000,
+            x: -250,
             y: 0,
             t: 1000,
             sx: .75,
@@ -212,7 +317,10 @@ export default class Canvas extends React.Component {
     queue.loadFile({id:"background", src:"/assets/background-kitchen-ipadhd.png"});
     queue.loadFile({id:"melinda_full", src:"/assets/melinda-c1p1-ipadhd.png"});
     queue.loadFile({id:"melinda_hand", src:"/assets/melinda_hand.png"});
-    // queue.loadFile({id:"melinda_eye", src:"/assets/melinda_eye_closed.png"});
+    queue.loadFile({id:"text_hi", src:"/assets/hi_text.png"});
+    queue.loadFile({id:"text_melinda_intro", src:"/assets/text_melinda_intro.png"});
+    queue.loadFile({id:"text_adventure_with_friends", src:"/assets/text_adventure_with_friends.png"});
+
     queue.load();
   }
 
@@ -336,8 +444,6 @@ export default class Canvas extends React.Component {
   }
 
   clickEvent(img, data, e) {
-    console.log("CLICK");
-    console.log(data);
     // TODO this is currently hardcoded to only use first clickable animation
     this.setSteps(data.clickable[0].childImg.src, data.clickable[0], 0);
   }
