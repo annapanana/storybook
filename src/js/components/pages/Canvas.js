@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from 'react-dom';
-import {positionData, loadingData} from "../../data/melinda_data.js";
+import {positionData, loadingData} from "../../data/stonesoup_data.js";
+import "../../../sass/components/pages/canvas.sass"
 
 export default class Canvas extends React.Component {
   constructor() {
@@ -41,21 +42,25 @@ export default class Canvas extends React.Component {
     })
 
     img.addEventListener("mousedown", this.clickEvent.bind(this, img, data));
+    this.setClickableDataParent(data, img);
 
+    // Create image group if there are children objects
     if (data.children.length > 0) {
       this.setImageGroup(img, data);
       return;
     }
 
-    img = this.setInitPositionData(img, id)
-    this.renderCanvas();
-    // push loaded image to data set
-    data.img = img;
-    img.alpha = data.a;
-    this.setSteps(img, data, 0);
-
     // Add starting assets to the stage
     this.stage.addChild(img);
+    setTimeout(() => {
+      img = this.setInitPositionData(img, id);
+      this.renderCanvas();
+
+      // push loaded image to data set
+      data.img = img;
+      img.alpha = data.a;
+      this.setSteps(img, data, 0);
+    }, 100)
   }
 
   // if there are children, create a group
@@ -80,9 +85,18 @@ export default class Canvas extends React.Component {
     img.y = subData.y;
     img.scaleX = subData.scaleX;
     img.scaleY = subData.scaleY;
-    img.alpha = subData.a;
+    img.alpha = subData.a
     this.setClickableData(data, img, subData.id);
     container.addChild(img);
+  }
+
+  setClickableDataParent(data, img) {
+    if (!data.clickable || data.clickable.length === 0) {
+      return ;
+    }
+    for (var i = 0; i < data.clickable.length; i++) {
+      data.clickable[i].childImg.src = img;
+    }
   }
 
   setClickableData(data, img, id) {
@@ -106,7 +120,7 @@ export default class Canvas extends React.Component {
   }
 
   setSteps(obj, data, i, startingX, startingY) {
-    this.recenter(obj, data);
+    // this.recenter(obj, data);
     if (i === data.steps.length) {
       return;
     }
@@ -151,12 +165,16 @@ export default class Canvas extends React.Component {
 
   clickEvent(img, data, e) {
     // TODO this is currently hardcoded to only use first clickable animation
-    this.setSteps(data.clickable[0].childImg.src, data.clickable[0], 0);
+    if (data.clickable && data.clickable.length > 0) {
+      this.setSteps(data.clickable[0].childImg.src, data.clickable[0], 0);
+    }
   }
 
   render() {
     return (
-      <canvas ref="canvas" width={this.width} height={this.height}></canvas>
+      <div class="canvas-wrap">
+        <canvas ref="canvas" width={this.width} height={this.height}></canvas>
+      </div>
     )
   }
 }

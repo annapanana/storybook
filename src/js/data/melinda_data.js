@@ -2,12 +2,12 @@ const width = "1024";
 const height = "768";
 
 const loadingData = [
-  {id:"background", src:"/assets/background-kitchen-ipadhd.png"},
-  {id:"melinda_full", src:"/assets/melinda-c1p1-ipadhd.png"},
-  {id:"melinda_hand", src:"/assets/melinda_hand.png"},
-  {id:"text_hi", src:"/assets/hi_text.png"},
-  {id:"text_melinda_intro", src:"/assets/text_melinda_intro.png"},
-  {id:"text_adventure_with_friends", src:"/assets/text_adventure_with_friends.png"}
+  {id:"background", src:"/assets/melinda/background-kitchen-ipadhd.png"},
+  {id:"melinda_full", src:"/assets/melinda/melinda-c1p1-ipadhd.png"},
+  {id:"melinda_hand", src:"/assets/melinda/melinda_hand.png"},
+  {id:"text_hi", src:"/assets/melinda/hi_text.png"},
+  {id:"text_melinda_intro", src:"/assets/melinda/text_melinda_intro.png"},
+  {id:"text_adventure_with_friends", src:"/assets/melinda/text_adventure_with_friends.png"}
 ]
 const positionData = [
   {
