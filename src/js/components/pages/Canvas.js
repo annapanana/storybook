@@ -27,8 +27,8 @@ export default class Canvas extends React.Component {
             img: {src:"/assets/melinda_eye_closed.png"},
             scaleX: .5,
             scaleY: .5,
-            x: this.width - 500,
-            y: this.height,
+            x: 255,
+            y: 200,
             steps: []
           }
         ],
@@ -192,6 +192,7 @@ export default class Canvas extends React.Component {
       this.setImageGroup(img, data);
       return;
     }
+
     img = this.setInitPositionData(img, id)
     this.renderCanvas();
     // push loaded image to data set
@@ -205,7 +206,6 @@ export default class Canvas extends React.Component {
   // if there are children, create a group
   setImageGroup(img, data) {
     var container = new createjs.Container();
-    container.backgroundColor = "#000"
     container.addChild(img);
     var queue = new createjs.LoadQueue(true);
     queue.on("complete", this.positionGroup.bind(this, container, data));
@@ -229,8 +229,9 @@ export default class Canvas extends React.Component {
   }
 
   positionGroup(container, data, e) {
+    container.x = data.x;
+    container.y = data.y;
     this.setSteps(container, data, 0);
-    // Add starting assets to the stage
     this.stage.addChild(container);
   }
 
