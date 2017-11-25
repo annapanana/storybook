@@ -397,6 +397,35 @@ const positionData = [
   }
 ]
 
+// var clickableAnim = {
+//   childImg: {
+//     id: "raccoon_hat",
+//     src: ""
+//   },
+//   steps: [
+//     {
+//       wait: 0,
+//       x: 0,
+//       y: 0,
+//       t: 100,
+//       sx: .28,
+//       sy: .28,
+//       easePow: 3,
+//       rot: 0
+//     },
+//     {
+//       wait: 150,
+//       x: 0,
+//       y: 0,
+//       t: 100,
+//       sx: .24,
+//       sy: .24,
+//       easePow: 3,
+//       rot: 0
+//     }
+//   ]
+// }
+
 module.exports = {
   positionData,
   loadingData

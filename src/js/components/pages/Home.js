@@ -19,7 +19,7 @@ export default class Home extends React.Component {
     this.state = {
       stage:null,
       curPage:1,
-      pageData: pageData_03
+      pageData: pageData_01
     }
   }
 
@@ -49,6 +49,7 @@ export default class Home extends React.Component {
 // <Snow stage={stage}/>
   render() {
     const {stage, curPage, pageData} = this.state;
+    console.log(pageData);
     return (
       <div class="home-wrap">
         <div class="button" onClick={this.updatePage.bind(this, -1)}>Back</div>
@@ -56,8 +57,8 @@ export default class Home extends React.Component {
           stage={stage}
           positionData={pageData.positionData}
           loadingData={pageData.loadingData}/>
-
         <canvas ref="canvas" width={this.width} height={this.height}></canvas>
+
         <div class="button" onClick={this.updatePage.bind(this, 1)}>Next</div>
       </div>
     );

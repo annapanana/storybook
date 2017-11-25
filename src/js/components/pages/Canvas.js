@@ -173,6 +173,8 @@ export default class Canvas extends React.Component {
   }
 
   clickEvent(img, data, e) {
+    console.log(data.id);
+    console.log(data.clickable);
     // console.log("click event", data.id);
     // TODO this is currently hardcoded to only use first clickable animation
     if (data.clickable && data.clickable.length > 0) {
