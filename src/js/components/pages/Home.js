@@ -8,6 +8,7 @@ import "../../../sass/components/pages/home.sass"
 
 import * as pageData_01 from "../../data/stonesoup_data_pg01.js";
 import * as pageData_02 from "../../data/stonesoup_data_pg02.js";
+import * as pageData_03 from "../../data/stonesoup_data_pg03.js";
 
 export default class Home extends React.Component {
   constructor() {
@@ -18,7 +19,7 @@ export default class Home extends React.Component {
     this.state = {
       stage:null,
       curPage:1,
-      pageData: pageData_02
+      pageData: pageData_03
     }
   }
 

@@ -43,10 +43,14 @@ export default class Canvas extends React.Component {
       return p.id === id;
     })
 
+    // console.log(id);
     if (id !== "frame") {
       img.addEventListener("mousedown", this.clickEvent.bind(this, img, data));
       this.setClickableDataParent(data, img);
     }
+
+    // Set the Z index for proper layering
+    this.stage.setChildIndex(img, data.zIndex);
 
     // Create image group if there are children objects
     if (data.children.length > 0) {
@@ -73,6 +77,7 @@ export default class Canvas extends React.Component {
     container.addChild(img);
     var queue = new createjs.LoadQueue(true);
     queue.on("complete", this.positionGroup.bind(this, container, data));
+
     for (var i = 0; i < data.children.length; i++) {
       queue.on("fileload", this.handleChildLoad.bind(this, container, data.children[i], data));
       queue.loadFile({
@@ -168,7 +173,7 @@ export default class Canvas extends React.Component {
   }
 
   clickEvent(img, data, e) {
-    console.log("click event", data.id);
+    // console.log("click event", data.id);
     // TODO this is currently hardcoded to only use first clickable animation
     if (data.clickable && data.clickable.length > 0) {
       this.setSteps(data.clickable[0].childImg.src, data.clickable[0], 0);
