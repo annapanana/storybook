@@ -19,7 +19,7 @@ export default class Home extends React.Component {
     this.state = {
       stage:null,
       curPage:1,
-      pageData: pageData_03
+      pageData: pageData_01
     }
   }
 
@@ -35,6 +35,8 @@ export default class Home extends React.Component {
         return pageData_01;
       case 2:
         return pageData_02;
+      case 3:
+        return pageData_03;
     }
   }
 

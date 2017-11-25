@@ -30,6 +30,14 @@ export default class Canvas extends React.Component {
         queue.loadFile(nextProps.loadingData[i]);
       }
       queue.load();
+
+
+      // LOAD AUDIO
+      if (!createjs.Sound.initializeDefaultPlugins()) {return;}
+      createjs.Sound.alternateExtensions = ["mp3", "ogg"];
+      createjs.Sound.on("fileload", function(event) {
+          console.log(event);
+      }, this);
     }
   }
 
@@ -105,6 +113,10 @@ export default class Canvas extends React.Component {
     }
     for (var i = 0; i < data.clickable.length; i++) {
       data.clickable[i].childImg.src = img;
+      if (data.clickable[i].audio) {
+        console.log(data.clickable[i].audio);
+        createjs.Sound.registerSound(data.clickable[i].audio, data.clickable[i].childImg.id);
+      }
     }
   }
 
@@ -173,9 +185,10 @@ export default class Canvas extends React.Component {
   }
 
   clickEvent(img, data, e) {
-    // console.log("click event", data.id);
     // TODO this is currently hardcoded to only use first clickable animation
     if (data.clickable && data.clickable.length > 0) {
+      console.log(data.clickable[0].childImg.id);
+      createjs.Sound.play(data.clickable[0].childImg.id);
       this.setSteps(data.clickable[0].childImg.src, data.clickable[0], 0);
     }
   }

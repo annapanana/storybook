@@ -53,7 +53,7 @@ module.exports = {
       'styles': path.resolve(__dirname, './src/sass'),
       'components': path.resolve(__dirname, './src/js')
     },
-    'extensions': ['.js', '.json', '.jsx', '.css', 'sass', '.png', '.svg', '.jpg']
+    'extensions': ['.js', '.json', '.jsx', '.css', 'sass', '.png', '.svg', '.jpg', '.mp3']
   },
   'plugins': [
     new ExtractTextPlugin('[name].min.css')
