@@ -32,6 +32,29 @@ const loadingData = [
   {id:"frame", src:"/assets/stonesoup/pg03/pg03_Frame.png"}
 ]
 
+const clickableSteps = [
+  {
+    wait: 0,
+    x: 0,
+    y: 0,
+    t: 100,
+    sx: .28,
+    sy: .28,
+    easePow: 3,
+    rot: 0
+  },
+  {
+    wait: 150,
+    x: 0,
+    y: 0,
+    t: 100,
+    sx: .25,
+    sy: .25,
+    easePow: 3,
+    rot: 0
+  }
+]
+
 const positionData = [
   {
     id:"background",
@@ -153,7 +176,17 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [
+      {
+        childImg: {
+          id: "fg_pigeon_hat",
+          src: ""
+        },
+        audio:"/assets/stonesoup/pg03/P3_SFX_StartledPigeon_02.mp3",
+        steps: clickableSteps
+      }
+    ]
   },
   {
     id:"fg_pigeon_scarf",
@@ -165,7 +198,17 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [
+      {
+        childImg: {
+          id: "fg_pigeon_scarf",
+          src: ""
+        },
+        audio:"/assets/stonesoup/pg03/audio/P3_SFX_StartledPigeon_03.mp3",
+        steps: clickableSteps
+      }
+    ]
   },
   {
     id:"skunk_baby_01",
@@ -179,7 +222,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "skunk_baby_01",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_Startled_Skunk_02.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"skunk_baby_02",
@@ -193,7 +244,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "skunk_baby_02",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_Startled_Skunk_03.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"skunk_blue",
@@ -207,7 +266,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "skunk_blue",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_Startled_Skunk_04.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"skunk_yellow",
@@ -221,7 +288,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "skunk_yellow",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_Startled_Skunk_05.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"squirrel_blue",
@@ -235,7 +310,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "squirrel_blue",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_StartledRaccoon_02.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"squirrel_ear_muffs",
@@ -249,7 +332,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "squirrel_ear_muffs",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_StartledRaccoon_03.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"squirrel_green",
@@ -263,7 +354,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "squirrel_green",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_StartledRaccoon_04.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"squirrel_pink",
@@ -277,7 +376,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "squirrel_pink",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_StartledRaccoon_02.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"squirrel_purple",
@@ -291,7 +398,15 @@ const positionData = [
     rot: 0,
     img: {},
     a: 1,
-    steps: []
+    steps: [],
+    clickable: [{
+      childImg: {
+        id: "squirrel_purple",
+        src: ""
+      },
+      audio:"/assets/stonesoup/pg03/audio/P3_SFX_StartledRaccoon_03.mp3",
+      steps: clickableSteps
+    }]
   },
   {
     id:"pipe_blue",
