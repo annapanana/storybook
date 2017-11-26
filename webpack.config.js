@@ -51,7 +51,7 @@ module.exports = {
       }),
       new ExtractTextPlugin('app.min.css')
     ].concat(!isDebug ? [
-      new webpack.optimize.ModuleConcatenationPlugin(),
+      // new webpack.optimize.ModuleConcatenationPlugin(),
       new webpack.optimize.UglifyJsPlugin({
         mangle: false,
         sourceMap: true,
