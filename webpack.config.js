@@ -12,7 +12,7 @@ module.exports = {
     app: "./js/App.js",
   },
   output: {
-    path: __dirname + "/src/",
+    path: __dirname + "/public/",
     filename: "app.min.js"
   },
   module: {
