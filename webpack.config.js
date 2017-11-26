@@ -9,7 +9,7 @@ module.exports = {
   context: path.join(__dirname, "src"),
   devtool: isDebug ? "cheap-module-eval-source-map" : "cheap-module-source-map",
   entry: {
-    app: "./js/app.js",
+    app: "./js/App.js",
   },
   output: {
     path: __dirname + "/src/",
