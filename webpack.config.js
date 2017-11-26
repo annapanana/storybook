@@ -7,12 +7,12 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin'),
 
 module.exports = {
   context: path.join(__dirname, "src"),
-  devtool: isDebug ? "cheap-module-eval-source-map" : "cheap-module-source-map",
+  devtool: 'source-map',
   entry: {
     app: "./js/App.js",
   },
   output: {
-    path: __dirname + "/src/",
+    path: __dirname + "/dist/",
     filename: "app.min.js"
   },
   module: {
