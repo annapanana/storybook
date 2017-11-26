@@ -5,7 +5,7 @@
   "main": "test_page.js",
   "scripts": {
     "dev": "webpack-dev-server --content-base src --inline --hot",
-    "start": "node tools/publicServer.js",
+    "start": "babel-node tools/publicServer.js",
     "clean-public": "npm run remove-public && mkdir public",
     "remove-public": "node_modules/.bin/rimraf ./public",
     "build:html": "babel-node tools/buildHtml.js",
@@ -53,7 +53,6 @@
     "style-loader": "^0.17.0",
     "webpack": "^2.5.1",
     "webpack-dev-server": "^2.4.5"
-
   },
   "devDependencies": {
     "babel-core": "^6.26.0",
