@@ -5,7 +5,7 @@ export default {
   devtool: 'source-map',
 
   entry: [
-    './src/index'
+    './src/js/App.js'
   ],
 
   output: {
@@ -15,7 +15,6 @@ export default {
   },
 
   plugins: [
-    new webpack.optimize.DedupePlugin(),
     new webpack.optimize.UglifyJsPlugin({
       minimize: true,
       compress: {
