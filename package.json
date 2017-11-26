@@ -8,7 +8,7 @@
     "lint": "standard",
     "test": "standard && webpack --bail",
     "dev": "webpack-dev-server --content-base src --inline --hot",
-    "start": "webpack-dev-server --content-base src"
+    "start": "node ./src/app.min.js"
   },
   "repository": {
     "type": "git",
