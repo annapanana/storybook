@@ -1,7 +1,7 @@
 const ExtractTextPlugin = require('extract-text-webpack-plugin'),
       webpack = require('webpack'),
       path = require('path'),
-      env = process.env.NODE_ENV || 'debug',
+      env = 'production',
       isDebug = env === 'debug',
       isProduction = env === 'production';
 
@@ -12,7 +12,7 @@ module.exports = {
     app: "./js/App.js",
   },
   output: {
-    path: __dirname + "/dist/",
+    path: __dirname + "/src/",
     filename: "app.min.js"
   },
   module: {

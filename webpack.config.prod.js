@@ -3,10 +3,10 @@ const webpack = require('webpack')
 
 export default {
   devtool: 'source-map',
-
-  entry: [
-    './src/js/App.js'
-  ],
+  context: path.join(__dirname, "src"),
+  entry: {
+    app: "./app.min.js",
+  },
 
   output: {
     path: path.join(__dirname, 'public'),
@@ -32,7 +32,8 @@ export default {
     loaders: [
       { test: /\.js?$/,
         loader: 'babel-loader',
-        exclude: /node_modules/ },
+        exclude: /node_modules/
+      },
       { test: /\.scss?$/,
         loader: 'style!css!sass',
         include: path.join(__dirname, 'src', 'sass') },
