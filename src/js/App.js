@@ -16,7 +16,6 @@ import {
 
 // Pages
 import Home from './components/pages/Home'
-
 ReactDOM.render((
   <Router>
     <div>

@@ -40,8 +40,7 @@ module.exports = {
               ]
         })
       }
-    ],
-    noParse: [/braintree-web/]
+    ]
   },
   plugins:[
     new webpack.DefinePlugin({

@@ -21,6 +21,7 @@ export default class Home extends React.Component {
       curPage:1,
       pageData: pageData_01
     }
+    console.log('HOME LOADED')
   }
 
   componentDidMount() {
