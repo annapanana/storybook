@@ -1,73 +1,78 @@
-const path = require('path');
-const webpack = require('webpack');
-const autoprefixer = require('autoprefixer');
-const ExtractTextPlugin = require('extract-text-webpack-plugin');
-
-const sassLoaders = [
-  'css-loader',
-  // 'postcss-loader',
-  'sass-loader?indentedSyntax=sass&includePaths[]=' + path.resolve(__dirname, './src')
-]
+const ExtractTextPlugin = require('extract-text-webpack-plugin'),
+      webpack = require('webpack'),
+      path = require('path'),
+      env = process.env.NODE_ENV || 'debug',
+      isDebug = env === 'debug',
+      isProduction = env === 'production';
 
 module.exports = {
   context: path.join(__dirname, "src"),
+  devtool: isDebug ? "cheap-module-eval-source-map" : "cheap-module-source-map",
   entry: {
-    app: "./js/App.js",
+    app: "./js/app.js",
   },
   output: {
     path: __dirname + "/src/",
-    filename: "[name].min.js"
+    filename: "app.min.js"
   },
   module: {
     rules: [
       {
-        'test': /\.js$/,
-        'exclude': /node_modules/,
-        'use': [{
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        use: [{
           'loader': 'babel-loader',
           'options': {
             presets: ['react', 'es2015', 'stage-0'],
-            plugins: ['react-html-attrs', 'transform-class-properties']
+            plugins: ['react-html-attrs']
           }
         }]
       },
       {
-        'test': /\.jsx$/,
-        'use': [{
-          'loader': 'babel-loader'
-        }],
-        'exclude': /node_modules/
-      },
-      {
-        'test': /\.(sass|scss)$/,
-        'exclude': /node_modules/,
-        'use': ExtractTextPlugin.extract({
-          fallback: "style-loader",
-          use: sassLoaders
+        test: /\.(sass|scss)$/,
+        exclude: /node_modules/,
+        use: ExtractTextPlugin.extract({
+              fallback: 'style-loader',
+              use: [
+                { loader: 'css-loader', options: { sourceMap: true, importLoaders: 1 } },
+                { loader: 'postcss-loader', options: { sourceMap: true, plugins: () => {return [require('autoprefixer')]} } },
+                { loader: 'sass-loader', options: { sourceMap: true } }
+              ]
         })
       }
-    ]
+    ],
+    noParse: [/braintree-web/]
   },
-  'resolve': {
+  plugins:[
+    new webpack.DefinePlugin({
+        ENV: JSON.stringify(env),
+        VERSION: JSON.stringify(new Date().toLocaleString()),
+        NODE_ENV: JSON.stringify(isDebug?env:'production')
+      }),
+      new ExtractTextPlugin('app.min.css')
+    ].concat(!isDebug ? [
+      new webpack.optimize.ModuleConcatenationPlugin(),
+      new webpack.optimize.UglifyJsPlugin({
+        mangle: false,
+        sourceMap: true,
+        compress: {
+          warnings: false,
+          drop_console: true,
+          drop_debugger: true
+        }
+      }),
+      new webpack.optimize.AggressiveMergingPlugin()
+    ]:[]),
+
+  resolve: {
+    modules: [
+      path.join(__dirname, "src"),
+      "node_modules"
+    ],
     'alias': {
-      'styles': path.resolve(__dirname, './src/sass'),
-      'components': path.resolve(__dirname, './src/js')
-    },
-    'extensions': ['.js', '.json', '.jsx', '.css', 'sass', '.png', '.svg', '.jpg', '.mp3']
-  },
-  'plugins': [
-    new ExtractTextPlugin('[name].min.css')
-    // new webpack.LoaderOptionsPlugin({
-    //   'options': {
-    //     'postcss': [
-    //       autoprefixer({
-    //         'browsers': ['last 3 versions', '> 1%', 'IE >= 11']
-    //       })
-    //     ]
-    //   }
-    // })
-  ],
-  devServer: {
-    historyApiFallback: true
+        'styles': path.resolve(__dirname, './src/sass'),
+        'components': path.resolve(__dirname, './src/js')
+      },
+      'extensions': ['.js', '.jsx', '.css', '.sass', '.scss']
   }
 };

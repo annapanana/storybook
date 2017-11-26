@@ -4,10 +4,11 @@
   "description": "a story book",
   "main": "test_page.js",
   "scripts": {
-    "build": "webpack",
+    "build": "webpack -p",
     "lint": "standard",
     "test": "standard && webpack --bail",
-    "dev": "webpack-dev-server --content-base src --inline --hot"
+    "dev": "webpack-dev-server --content-base src --inline --hot",
+    "start": "webpack-dev-server --content-base src"
   },
   "repository": {
     "type": "git",
