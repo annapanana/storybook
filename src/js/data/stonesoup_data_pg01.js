@@ -4,11 +4,11 @@ const assetSrc = "https://s3-us-west-2.amazonaws.com/uproot";
 
 const loadingData = [
   {id:"background", src:`${assetSrc}/assets/stonesoup/pg01/pg01_BG.png`},
-  {id:"middleground", src:"/assets/stonesoup/pg01/pg01_MG.png"},
-  {id:"raccoon_gloves", src:"/assets/stonesoup/pg01/pg01_FG_Gloves.png"},
-  {id:"raccoon_scarf", src:"/assets/stonesoup/pg01/pg01_FG_Scarf.png"},
-  {id:"raccoon_hat", src:"/assets/stonesoup/pg01/pg01_FG_Hat.png"},
-  {id:"frame", src:"/assets/stonesoup/pg01/pg01_FrameAndText.png"}
+  {id:"middleground", src:`${assetSrc}/assets/stonesoup/pg01/pg01_MG.png`},
+  {id:"raccoon_gloves", src:`${assetSrc}/assets/stonesoup/pg01/pg01_FG_Gloves.png`},
+  {id:"raccoon_scarf", src:`${assetSrc}/assets/stonesoup/pg01/pg01_FG_Scarf.png`},
+  {id:"raccoon_hat", src:`${assetSrc}/assets/stonesoup/pg01/pg01_FG_Hat.png`},
+  {id:"frame", src:`${assetSrc}/assets/stonesoup/pg01/pg01_FrameAndText.png`}
 ]
 
 const positionData = [
