@@ -14,6 +14,8 @@ export default class Canvas extends React.Component {
     this.handleFileComplete = this.handleFileComplete.bind(this);
     this.renderCanvas = this.renderCanvas.bind(this);
     this.clickEvent = this.clickEvent.bind(this);
+
+    this.assetSrc = "https://s3-us-west-2.amazonaws.com/uproot";
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,7 +29,6 @@ export default class Canvas extends React.Component {
       queue.on("fileload", this.handleFileComplete.bind(this));
       queue.on("complete", this.renderCanvas.bind(this));
       for (var i = 0; i < nextProps.loadingData.length; i++) {
-        console.log("load", nextProps.loadingData[i]);
         queue.loadFile(nextProps.loadingData[i]);
       }
       queue.load();
@@ -91,7 +92,7 @@ export default class Canvas extends React.Component {
       queue.on("fileload", this.handleChildLoad.bind(this, container, data.children[i], data));
       queue.loadFile({
         id:data.children[i].id,
-        src:data.children[i].img["src"]
+        src:this.assetSrc + data.children[i].img["src"]
       });
     }
   }
