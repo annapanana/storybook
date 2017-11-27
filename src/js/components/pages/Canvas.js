@@ -27,6 +27,7 @@ export default class Canvas extends React.Component {
       queue.on("fileload", this.handleFileComplete.bind(this));
       queue.on("complete", this.renderCanvas.bind(this));
       for (var i = 0; i < nextProps.loadingData.length; i++) {
+        console.log("load", nextProps.loadingData[i]);
         queue.loadFile(nextProps.loadingData[i]);
       }
       queue.load();

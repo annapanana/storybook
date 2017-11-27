@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
+import 'yuki-createjs';
 import {
   BrowserRouter as Router,
   Route,

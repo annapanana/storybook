@@ -1,8 +1,9 @@
 const width = "1024";
 const height = "768";
+const assetSrc = "https://s3-us-west-2.amazonaws.com/uproot";
 
 const loadingData = [
-  {id:"background", src:"/assets/stonesoup/pg01/pg01_BG.png"},
+  {id:"background", src:`${assetSrc}/assets/stonesoup/pg01/pg01_BG.png`},
   {id:"middleground", src:"/assets/stonesoup/pg01/pg01_MG.png"},
   {id:"raccoon_gloves", src:"/assets/stonesoup/pg01/pg01_FG_Gloves.png"},
   {id:"raccoon_scarf", src:"/assets/stonesoup/pg01/pg01_FG_Scarf.png"},

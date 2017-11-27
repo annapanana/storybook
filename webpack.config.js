@@ -56,7 +56,7 @@ module.exports = {
         sourceMap: true,
         compress: {
           warnings: false,
-          drop_console: true,
+          drop_console: false,
           drop_debugger: true
         }
       }),
@@ -72,6 +72,6 @@ module.exports = {
         'styles': path.resolve(__dirname, './src/sass'),
         'components': path.resolve(__dirname, './src/js')
       },
-      'extensions': ['.js', '.jsx', '.css', '.sass', '.scss']
+      'extensions': ['.js', '.jsx', '.css', '.sass', '.scss', '.png']
   }
 };
